@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello, world!</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bulma CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <style>
+        body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: gray;
+      }
+
+      .section.has-text-centered {
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        margin: 20px;
+        width: 70%;
+      }
+
+    </style>
+    <script>
+      function register() {
+        $.ajax({
+          type: "POST",
+          url: "/api/register",
+          data: {
+            id_give: $("#userid").val(),
+            pw_give: $("#userpw").val(),
+            nick_give: $("#usernick").val(),
+          },
+          success: function (response) {
+            if (response["result"] === "success") {
+              alert("User registration complete!");
+              window.location.href = "/login";
+            } else {
+              alert(response["msg"]);
+            }
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="section has-text-centered">
+      <h1 class="title has-text-white">User Registration Page</h1>
+      <div class="container" style="width: 60%">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label has-text-white" for="userid">ID</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input
+                  type="text"
+                  class="input"
+                  id="userid"
+                  aria-describedby="emailHelp"
+                  style="border-radius: 10px;"
+                  placeholder="My ID"
+                  required/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label has-text-white" for="userpw">PW</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input
+                  type="password"
+                  class="input"
+                  id="userpw"
+                  placeholder="My Password"
+                  style="border-radius: 10px;"
+                  required/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label has-text-white" for="usernick">NICKNAME</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input
+                  type="text"
+                  class="input"
+                  id="usernick"
+                  style="border-radius: 10px;"
+                  placeholder="My Nickname"
+                  required/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="button is-primary" onclick="register()">
+          User Registration
+        </button>
+        <button
+          class="button is-primary"
+          onclick="window.location.href='/login'"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
